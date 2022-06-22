@@ -71,7 +71,7 @@ def append_doc_to_shelf(doc_number, shelf_number):
 
 
 def delete_doc():
-	"""Удаление документа и номера документа"""
+	"""Удаление документа и номера документа с полки"""
 	user_doc_number = input('Введите номер документа - ')
 	doc_exist = check_document_existance(user_doc_number)
 	if doc_exist:
