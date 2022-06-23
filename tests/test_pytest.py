@@ -1,8 +1,9 @@
 import unittest.mock
 import pytest
 import secretary
+from pytest import MarkGenerator
 from secretary import remove_doc_from_shelf, check_document_existance, add_new_shelf, \
-	append_doc_to_shelf, get_doc_owner_name, get_doc_shelf
+	append_doc_to_shelf, get_doc_owner_name, get_doc_shelf, add_new_doc
 
 
 FIXTURE_true_doc_number = [s["number"] for s in secretary.documents]
@@ -55,3 +56,20 @@ def test_get_doc_shelf(user_doc_number):
 	with unittest.mock.patch('builtins.input', return_value=user_doc_number):
 		shelf_number = get_doc_shelf()
 		assert user_doc_number in secretary.directories[shelf_number]
+
+
+# @pytest.mark.parametrize("new_doc_shelf_number", FIXTURE_shelf_number)
+# @pytest.mark.parametrize("new_doc_owner_name", ["Артем Сидоров", "Анатолий Дроздов"])
+# @pytest.mark.parametrize("new_doc_type", ["passport", "invoice", "insurance"])
+# @pytest.mark.parametrize("new_doc_number", FIXTURE_doc_number)
+# def test_add_new_doc(new_doc_number, new_doc_type, new_doc_owner_name, new_doc_shelf_number):
+# 	with unittest.mock.patch('builtins.input', return_value=new_doc_number):
+# 		with unittest.mock.patch('builtins.input', return_value=new_doc_type):
+# 			with unittest.mock.patch('builtins.input', return_value=new_doc_owner_name):
+# 				with unittest.mock.patch('builtins.input', return_value=new_doc_shelf_number):
+# 					add_new_doc()
+# 					assert {
+# 					"type": new_doc_type,
+# 					"number": new_doc_number,
+# 					"name": new_doc_owner_name,
+# 							} in secretary.documents
