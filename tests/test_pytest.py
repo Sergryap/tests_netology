@@ -58,18 +58,16 @@ def test_get_doc_shelf(user_doc_number):
 		assert user_doc_number in secretary.directories[shelf_number]
 
 
-# @pytest.mark.parametrize("new_doc_shelf_number", FIXTURE_shelf_number)
-# @pytest.mark.parametrize("new_doc_owner_name", ["Артем Сидоров", "Анатолий Дроздов"])
-# @pytest.mark.parametrize("new_doc_type", ["passport", "invoice", "insurance"])
-# @pytest.mark.parametrize("new_doc_number", FIXTURE_doc_number)
-# def test_add_new_doc(new_doc_number, new_doc_type, new_doc_owner_name, new_doc_shelf_number):
-# 	with unittest.mock.patch('builtins.input', return_value=new_doc_number):
-# 		with unittest.mock.patch('builtins.input', return_value=new_doc_type):
-# 			with unittest.mock.patch('builtins.input', return_value=new_doc_owner_name):
-# 				with unittest.mock.patch('builtins.input', return_value=new_doc_shelf_number):
-# 					add_new_doc()
-# 					assert {
-# 					"type": new_doc_type,
-# 					"number": new_doc_number,
-# 					"name": new_doc_owner_name,
-# 							} in secretary.documents
+@pytest.mark.parametrize("new_doc_shelf_number", FIXTURE_shelf_number)
+@pytest.mark.parametrize("new_doc_owner_name", ["Артем Сидоров", "Анатолий Чубайс", "Максим Галкин"])
+@pytest.mark.parametrize("new_doc_type", ["passport", "invoice", "insurance"])
+@pytest.mark.parametrize("new_doc_number", FIXTURE_doc_number)
+def test_add_new_doc(new_doc_number, new_doc_type, new_doc_owner_name, new_doc_shelf_number):
+	add_new_doc(new_doc_number, new_doc_type, new_doc_owner_name, new_doc_shelf_number)
+	new_doc = {
+		"type": new_doc_type,
+		"number": new_doc_number,
+		"name": new_doc_owner_name
+	}
+	assert new_doc in secretary.documents
+	assert new_doc_number in secretary.directories[new_doc_shelf_number]
